@@ -1,0 +1,21 @@
+{
+  "name": "UniT.Logging",
+  "rootNamespace": "UniT.Logging",
+  "references": [
+    "UniT.Extensions",
+    "UniT.DI",
+    "Zenject"
+  ],
+  "versionDefines": [
+    {
+      "name": "com.frostbun.unit",
+      "expression": "",
+      "define": "UNIT_DI"
+    },
+    {
+      "name": "com.svermeulen.extenject",
+      "expression": "",
+      "define": "UNIT_ZENJECT"
+    }
+  ]
+}
