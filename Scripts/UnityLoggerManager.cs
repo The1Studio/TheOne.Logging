@@ -36,33 +36,32 @@ namespace UniT.Logging
 
             protected override void Debug(string message)
             {
-                UnityEngine.Debug.Log(message);
+                UnityEngine.Debug.unityLogger.Log(this.Name, message);
             }
 
             protected override void Info(string message)
             {
-                UnityEngine.Debug.Log(message);
+                UnityEngine.Debug.unityLogger.Log(this.Name, message);
             }
 
             protected override void Warning(string message)
             {
-                UnityEngine.Debug.LogWarning(message);
+                UnityEngine.Debug.unityLogger.LogWarning(this.Name, message);
             }
 
             protected override void Error(string message)
             {
-                UnityEngine.Debug.LogError(message);
+                UnityEngine.Debug.unityLogger.LogError(this.Name, message);
             }
 
             protected override void Critical(string message)
             {
-                UnityEngine.Debug.LogError(message);
+                UnityEngine.Debug.unityLogger.LogError(this.Name, message);
             }
 
-            protected override void Exception(string message, Exception exception)
+            protected override void Exception(Exception exception)
             {
-                UnityEngine.Debug.LogError(message);
-                UnityEngine.Debug.LogException(exception);
+                UnityEngine.Debug.unityLogger.LogException(exception);
             }
         }
     }
