@@ -11,6 +11,7 @@ namespace UniT.Logging
             LogLevel                 logLevel = LogLevel.Info
         )
         {
+            if (container.Contains<ILoggerManager>()) return;
             var loggerManager = (ILoggerManager)new UnityLoggerManager(logLevel);
             container.AddInterfaces(loggerManager);
             container.AddInterfaces(loggerManager.GetDefaultLogger());

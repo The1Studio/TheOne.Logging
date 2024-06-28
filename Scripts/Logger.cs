@@ -18,31 +18,31 @@ namespace UniT.Logging
         void ILogger.Debug(string message)
         {
             if (this.Config.Level > LogLevel.Debug) return;
-            this.Debug(message);
+            this.Debug($"[{LogLevel.Debug}] {message}");
         }
 
         void ILogger.Info(string message)
         {
             if (this.Config.Level > LogLevel.Info) return;
-            this.Info(message);
+            this.Info($"[{LogLevel.Info}] {message}");
         }
 
         void ILogger.Warning(string message)
         {
             if (this.Config.Level > LogLevel.Warning) return;
-            this.Warning(message);
+            this.Warning($"[{LogLevel.Warning}] {message}");
         }
 
         void ILogger.Error(string message)
         {
             if (this.Config.Level > LogLevel.Error) return;
-            this.Error(message);
+            this.Error($"[{LogLevel.Error}] {message}");
         }
 
         void ILogger.Critical(string message)
         {
             if (this.Config.Level > LogLevel.Critical) return;
-            this.Critical(message);
+            this.Critical($"[{LogLevel.Critical}] {message}");
         }
 
         void ILogger.Exception(Exception exception)
