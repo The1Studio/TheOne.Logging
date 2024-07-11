@@ -12,10 +12,12 @@ namespace UniT.Logging
         )
         {
             if (container.HasBinding<ILoggerManager>()) return;
-            var loggerManager = (ILoggerManager)new UnityLoggerManager(logLevel);
-            container.BindInterfacesTo(loggerManager.GetType()).FromInstance(loggerManager).AsSingle();
-            var logger = loggerManager.GetDefaultLogger();
-            container.BindInterfacesTo(logger.GetType()).FromInstance(logger).AsSingle();
+            container.BindInterfacesTo<UnityLoggerManager>()
+                .AsSingle()
+                .WithArguments(logLevel);
+            container.Bind<ILogger>()
+                .FromMethod(ctx => ctx.Container.Resolve<ILoggerManager>().GetLogger(ctx.ObjectType))
+                .AsTransient();
         }
     }
 }
