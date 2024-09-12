@@ -1,14 +1,19 @@
 #if UNIT_ZENJECT
 #nullable enable
-namespace UniT.Logging
+namespace UniT.Logging.DI
 {
     using Zenject;
 
-    public static class ZenjectBinder
+    public static class LoggerManagerZenject
     {
+        public static void BindLoggerManager(this DiContainer container)
+        {
+            container.BindLoggerManager(LogLevel.Info);
+        }
+
         public static void BindLoggerManager(
             this DiContainer container,
-            LogLevel         logLevel = LogLevel.Info
+            LogLevel         logLevel
         )
         {
             if (container.HasBinding<ILoggerManager>()) return;

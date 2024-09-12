@@ -1,14 +1,19 @@
 ﻿#if UNIT_DI
 #nullable enable
-namespace UniT.Logging
+namespace UniT.Logging.DI
 {
     using UniT.DI;
 
-    public static class DIBinder
+    public static class LoggerManagerDI
     {
+        public static void AddLoggerManager(this DependencyContainer container)
+        {
+            container.AddLoggerManager(LogLevel.Info);
+        }
+
         public static void AddLoggerManager(
             this DependencyContainer container,
-            LogLevel                 logLevel = LogLevel.Info
+            LogLevel                 logLevel
         )
         {
             if (container.Contains<ILoggerManager>()) return;
