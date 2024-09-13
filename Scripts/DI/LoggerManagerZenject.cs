@@ -8,21 +8,13 @@ namespace UniT.Logging.DI
     {
         public static void BindLoggerManager(this DiContainer container)
         {
-            container.BindLoggerManager(LogLevel.Info);
-        }
-
-        public static void BindLoggerManager(
-            this DiContainer container,
-            LogLevel         logLevel
-        )
-        {
             if (container.HasBinding<ILoggerManager>()) return;
-            container.BindInterfacesTo<UnityLoggerManager>()
-                .AsSingle()
-                .WithArguments(logLevel);
-            container.Bind<ILogger>()
-                .FromMethod(ctx => ctx.Container.Resolve<ILoggerManager>().GetLogger(ctx.ObjectType))
-                .AsTransient();
+            if (!container.HasBinding<LogLevel>())
+            {
+                container.Bind<LogLevel>().FromMethod(() => LogLevel.Info).AsSingle();
+            }
+            container.BindInterfacesTo<UnityLoggerManager>().AsSingle();
+            container.Bind<ILogger>().FromMethod(ctx => ctx.Container.Resolve<ILoggerManager>().GetLogger(ctx.ObjectType)).AsTransient();
         }
     }
 }

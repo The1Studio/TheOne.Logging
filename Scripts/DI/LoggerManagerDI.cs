@@ -8,18 +8,13 @@ namespace UniT.Logging.DI
     {
         public static void AddLoggerManager(this DependencyContainer container)
         {
-            container.AddLoggerManager(LogLevel.Info);
-        }
-
-        public static void AddLoggerManager(
-            this DependencyContainer container,
-            LogLevel                 logLevel
-        )
-        {
             if (container.Contains<ILoggerManager>()) return;
-            var loggerManager = (ILoggerManager)new UnityLoggerManager(logLevel);
-            container.AddInterfaces(loggerManager);
-            container.AddInterfaces(loggerManager.GetDefaultLogger());
+            if (!container.Contains<LogLevel>())
+            {
+                container.Add(LogLevel.Info);
+            }
+            container.AddInterfaces<UnityLoggerManager>();
+            container.AddInterfaces(container.Get<ILoggerManager>().GetDefaultLogger());
         }
     }
 }
