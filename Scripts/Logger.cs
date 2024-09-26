@@ -2,6 +2,7 @@
 namespace UniT.Logging
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     public abstract class Logger : ILogger
     {
@@ -18,31 +19,31 @@ namespace UniT.Logging
         void ILogger.Debug(string message)
         {
             if (this.Config.Level > LogLevel.Debug) return;
-            this.Debug($"[{LogLevel.Debug}] {message}");
+            this.Debug(this.Wrap(message));
         }
 
         void ILogger.Info(string message)
         {
             if (this.Config.Level > LogLevel.Info) return;
-            this.Info($"[{LogLevel.Info}] {message}");
+            this.Info(this.Wrap(message));
         }
 
         void ILogger.Warning(string message)
         {
             if (this.Config.Level > LogLevel.Warning) return;
-            this.Warning($"[{LogLevel.Warning}] {message}");
+            this.Warning(this.Wrap(message));
         }
 
         void ILogger.Error(string message)
         {
             if (this.Config.Level > LogLevel.Error) return;
-            this.Error($"[{LogLevel.Error}] {message}");
+            this.Error(this.Wrap(message));
         }
 
         void ILogger.Critical(string message)
         {
             if (this.Config.Level > LogLevel.Critical) return;
-            this.Critical($"[{LogLevel.Critical}] {message}");
+            this.Critical(this.Wrap(message));
         }
 
         void ILogger.Exception(Exception exception)
@@ -50,6 +51,8 @@ namespace UniT.Logging
             if (this.Config.Level > LogLevel.Exception) return;
             this.Exception(exception);
         }
+
+        protected virtual string Wrap(string message, [CallerMemberName] string logLevel = "") => $"[{logLevel}] {message}";
 
         protected abstract void Debug(string message);
 
