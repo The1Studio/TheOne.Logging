@@ -1,8 +1,8 @@
 ﻿#nullable enable
-namespace UniT.Logging
+namespace TheOne.Logging
 {
     using System.Collections.Generic;
-    using UniT.Extensions;
+    using TheOne.Extensions;
 
     public abstract class LoggerManager : ILoggerManager
     {
