@@ -1,5 +1,5 @@
 ﻿#nullable enable
-namespace UniT.Logging
+namespace TheOne.Logging
 {
     using System;
 
@@ -11,27 +11,27 @@ namespace UniT.Logging
 
         protected sealed override void Debug(string message)
         {
-            UnityEngine.Debug.unityLogger.Log(nameof(UniT), message);
+            UnityEngine.Debug.unityLogger.Log(nameof(TheOne), message);
         }
 
         protected sealed override void Info(string message)
         {
-            UnityEngine.Debug.unityLogger.Log(nameof(UniT), message);
+            UnityEngine.Debug.unityLogger.Log(nameof(TheOne), message);
         }
 
         protected sealed override void Warning(string message)
         {
-            UnityEngine.Debug.unityLogger.LogWarning(nameof(UniT), message);
+            UnityEngine.Debug.unityLogger.LogWarning(nameof(TheOne), message);
         }
 
         protected sealed override void Error(string message)
         {
-            UnityEngine.Debug.unityLogger.LogError(nameof(UniT), message);
+            UnityEngine.Debug.unityLogger.LogError(nameof(TheOne), message);
         }
 
         protected sealed override void Critical(string message)
         {
-            UnityEngine.Debug.unityLogger.LogError(nameof(UniT), message);
+            UnityEngine.Debug.unityLogger.LogError(nameof(TheOne), message);
         }
 
         protected sealed override void Exception(Exception exception)
