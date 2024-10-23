@@ -1,9 +1,9 @@
 ﻿#nullable enable
-namespace UniT.Logging
+namespace TheOne.Logging
 {
     using System;
     using System.Collections.Generic;
-    using UniT.Extensions;
+    using TheOne.Extensions;
     using UnityEngine.Scripting;
 
     public sealed class UnityLoggerManager : ILoggerManager
