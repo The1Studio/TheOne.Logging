@@ -1,0 +1,7 @@
+{
+  "name": "TheOne.Logging",
+  "rootNamespace": "TheOne.Logging",
+  "references": [
+    "TheOne.Extensions"
+  ]
+}

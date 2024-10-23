@@ -1,8 +1,8 @@
-#if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL && !UNIT_LOGGING_EXCEPTION && !UNIT_LOGGING_NONE
-#define UNIT_LOGGING_INFO
+#if !THEONE_LOGGING_DEBUG && !THEONE_LOGGING_INFO && !THEONE_LOGGING_WARNING && !THEONE_LOGGING_ERROR && !THEONE_LOGGING_CRITICAL && !THEONE_LOGGING_EXCEPTION && !THEONE_LOGGING_NONE
+#define THEONE_LOGGING_INFO
 #endif
 #nullable enable
-namespace UniT.Logging
+namespace TheOne.Logging
 {
     using System;
     using System.Diagnostics;
@@ -29,8 +29,8 @@ namespace UniT.Logging
 
     public static class LoggerExtensions
     {
-        #if !UNIT_LOGGING_DEBUG
-        [Conditional("UNIT_LOGGING_DEBUG")]
+        #if !THEONE_LOGGING_DEBUG
+        [Conditional("THEONE_LOGGING_DEBUG")]
         #endif
         public static void Debug(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -38,8 +38,8 @@ namespace UniT.Logging
             logger.Debug(message, context);
         }
 
-        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO
-        [Conditional("UNIT_LOGGING_INFO")]
+        #if !THEONE_LOGGING_DEBUG && !THEONE_LOGGING_INFO
+        [Conditional("THEONE_LOGGING_INFO")]
         #endif
         public static void Info(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -47,8 +47,8 @@ namespace UniT.Logging
             logger.Info(message, context);
         }
 
-        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING
-        [Conditional("UNIT_LOGGING_WARNING")]
+        #if !THEONE_LOGGING_DEBUG && !THEONE_LOGGING_INFO && !THEONE_LOGGING_WARNING
+        [Conditional("THEONE_LOGGING_WARNING")]
         #endif
         public static void Warning(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -56,8 +56,8 @@ namespace UniT.Logging
             logger.Warning(message, context);
         }
 
-        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR
-        [Conditional("UNIT_LOGGING_ERROR")]
+        #if !THEONE_LOGGING_DEBUG && !THEONE_LOGGING_INFO && !THEONE_LOGGING_WARNING && !THEONE_LOGGING_ERROR
+        [Conditional("THEONE_LOGGING_ERROR")]
         #endif
         public static void Error(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -65,8 +65,8 @@ namespace UniT.Logging
             logger.Error(message, context);
         }
 
-        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL
-        [Conditional("UNIT_LOGGING_CRITICAL")]
+        #if !THEONE_LOGGING_DEBUG && !THEONE_LOGGING_INFO && !THEONE_LOGGING_WARNING && !THEONE_LOGGING_ERROR && !THEONE_LOGGING_CRITICAL
+        [Conditional("THEONE_LOGGING_CRITICAL")]
         #endif
         public static void Critical(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -74,8 +74,8 @@ namespace UniT.Logging
             logger.Critical(message, context);
         }
 
-        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL && !UNIT_LOGGING_EXCEPTION
-        [Conditional("UNIT_LOGGING_EXCEPTION")]
+        #if !THEONE_LOGGING_DEBUG && !THEONE_LOGGING_INFO && !THEONE_LOGGING_WARNING && !THEONE_LOGGING_ERROR && !THEONE_LOGGING_CRITICAL && !THEONE_LOGGING_EXCEPTION
+        [Conditional("THEONE_LOGGING_EXCEPTION")]
         #endif
         public static void Exception(this ILogger logger, Exception exception, [CallerMemberName] string context = "")
         {

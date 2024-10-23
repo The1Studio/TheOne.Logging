@@ -1,5 +1,5 @@
 ﻿#nullable enable
-namespace UniT.Logging
+namespace TheOne.Logging
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -23,32 +23,32 @@ namespace UniT.Logging
 
         void ILogger.Debug(string message, string context)
         {
-            Debug.unityLogger.Log(nameof(UniT), this.Wrap(message, context));
+            Debug.unityLogger.Log(nameof(TheOne), this.Wrap(message, context));
         }
 
         void ILogger.Info(string message, string context)
         {
-            Debug.unityLogger.Log(nameof(UniT), this.Wrap(message, context));
+            Debug.unityLogger.Log(nameof(TheOne), this.Wrap(message, context));
         }
 
         void ILogger.Warning(string message, string context)
         {
-            Debug.unityLogger.LogWarning(nameof(UniT), this.Wrap(message, context));
+            Debug.unityLogger.LogWarning(nameof(TheOne), this.Wrap(message, context));
         }
 
         void ILogger.Error(string message, string context)
         {
-            Debug.unityLogger.LogError(nameof(UniT), this.Wrap(message, context));
+            Debug.unityLogger.LogError(nameof(TheOne), this.Wrap(message, context));
         }
 
         void ILogger.Critical(string message, string context)
         {
-            Debug.unityLogger.LogError(nameof(UniT), this.Wrap(message, context));
+            Debug.unityLogger.LogError(nameof(TheOne), this.Wrap(message, context));
         }
 
         void ILogger.Exception(Exception exception, string context)
         {
-            Debug.unityLogger.LogError(nameof(UniT), this.Wrap(exception.Message, context));
+            Debug.unityLogger.LogError(nameof(TheOne), this.Wrap(exception.Message, context));
             Debug.unityLogger.LogException(exception);
         }
 

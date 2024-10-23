@@ -1,27 +1,27 @@
 {
-  "name": "UniT.Logging.DI",
-  "rootNamespace": "UniT.Logging.DI",
+  "name": "TheOne.Logging.DI",
+  "rootNamespace": "TheOne.Logging.DI",
   "references": [
-    "UniT.Logging",
-    "UniT.DI",
+    "TheOne.Logging",
+    "TheOne.DI",
     "Zenject",
     "VContainer"
   ],
   "versionDefines": [
     {
-      "name": "com.frostbun.unit.di",
+      "name": "com.theone.di",
       "expression": "",
-      "define": "UNIT_DI"
+      "define": "THEONE_DI"
     },
     {
       "name": "com.svermeulen.extenject",
       "expression": "",
-      "define": "UNIT_ZENJECT"
+      "define": "THEONE_ZENJECT"
     },
     {
       "name": "jp.hadashikick.vcontainer",
       "expression": "",
-      "define": "UNIT_VCONTAINER"
+      "define": "THEONE_VCONTAINER"
     }
   ]
 }

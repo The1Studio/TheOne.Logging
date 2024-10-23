@@ -1,7 +1,0 @@
-{
-  "name": "UniT.Logging",
-  "rootNamespace": "UniT.Logging",
-  "references": [
-    "UniT.Extensions"
-  ]
-}

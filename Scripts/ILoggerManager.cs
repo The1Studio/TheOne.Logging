@@ -1,5 +1,5 @@
 ﻿#nullable enable
-namespace UniT.Logging
+namespace TheOne.Logging
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace UniT.Logging
 
         public ILogger GetLogger<T>() => this.GetLogger(typeof(T));
 
-        public ILogger GetDefaultLogger() => this.GetLogger(nameof(UniT));
+        public ILogger GetDefaultLogger() => this.GetLogger(nameof(TheOne));
 
         public IEnumerable<ILogger> GetAllLoggers();
     }

@@ -1,5 +1,5 @@
 ﻿#nullable enable
-namespace UniT.Logging
+namespace TheOne.Logging
 {
     using UnityEngine.Scripting;
 

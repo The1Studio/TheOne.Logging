@@ -1,8 +1,8 @@
-﻿#if UNIT_DI
+﻿#if THEONE_DI
 #nullable enable
-namespace UniT.Logging.DI
+namespace TheOne.Logging.DI
 {
-    using UniT.DI;
+    using TheOne.DI;
 
     public static class LoggerManagerDI
     {
