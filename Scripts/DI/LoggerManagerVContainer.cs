@@ -1,6 +1,6 @@
-#if UNIT_VCONTAINER
+#if THEONE_VCONTAINER
 #nullable enable
-namespace UniT.Logging.DI
+namespace TheOne.Logging.DI
 {
     using VContainer;
 
