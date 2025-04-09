@@ -19,8 +19,6 @@ namespace UniT.Logging
 
         public void Critical(string message);
 
-        public void Exception(Exception exception);
-
         public void Log(string message, LogLevel level)
         {
             switch (level)
@@ -55,6 +53,52 @@ namespace UniT.Logging
             }
         }
 
+        public void Debug(Func<string> messageBuilder);
+
+        public void Info(Func<string> messageBuilder);
+
+        public void Warning(Func<string> messageBuilder);
+
+        public void Error(Func<string> messageBuilder);
+
+        public void Critical(Func<string> messageBuilder);
+
+        public void Log(Func<string> messageBuilder, LogLevel level)
+        {
+            switch (level)
+            {
+                case LogLevel.Debug:
+                {
+                    this.Debug(messageBuilder);
+                    break;
+                }
+                case LogLevel.Info:
+                {
+                    this.Info(messageBuilder);
+                    break;
+                }
+                case LogLevel.Warning:
+                {
+                    this.Warning(messageBuilder);
+                    break;
+                }
+                case LogLevel.Error:
+                {
+                    this.Error(messageBuilder);
+                    break;
+                }
+                case LogLevel.Critical:
+                {
+                    this.Critical(messageBuilder);
+                    break;
+                }
+                case LogLevel.None: break;
+                default:            throw new ArgumentOutOfRangeException(nameof(level), level, null);
+            }
+        }
+
+        public void Exception(Exception exception);
+
         public void Debug(object message) => this.Debug(message.ToString());
 
         public void Info(object message) => this.Info(message.ToString());
@@ -65,8 +109,8 @@ namespace UniT.Logging
 
         public void Critical(object message) => this.Critical(message.ToString());
 
-        public void Log(Exception exception) => this.Exception(exception);
-
         public void Log(object message, LogLevel level) => this.Log(message.ToString(), level);
+
+        public void Log(Exception exception) => this.Exception(exception);
     }
 }

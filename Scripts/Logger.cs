@@ -46,6 +46,36 @@ namespace UniT.Logging
             this.Critical(this.Wrap(message));
         }
 
+        void ILogger.Debug(Func<string> messageBuilder)
+        {
+            if (this.Config.Level > LogLevel.Debug) return;
+            this.Debug(this.Wrap(messageBuilder()));
+        }
+
+        void ILogger.Info(Func<string> messageBuilder)
+        {
+            if (this.Config.Level > LogLevel.Info) return;
+            this.Info(this.Wrap(messageBuilder()));
+        }
+
+        void ILogger.Warning(Func<string> messageBuilder)
+        {
+            if (this.Config.Level > LogLevel.Warning) return;
+            this.Warning(this.Wrap(messageBuilder()));
+        }
+
+        void ILogger.Error(Func<string> messageBuilder)
+        {
+            if (this.Config.Level > LogLevel.Error) return;
+            this.Error(this.Wrap(messageBuilder()));
+        }
+
+        void ILogger.Critical(Func<string> messageBuilder)
+        {
+            if (this.Config.Level > LogLevel.Critical) return;
+            this.Critical(this.Wrap(messageBuilder()));
+        }
+
         void ILogger.Exception(Exception exception)
         {
             if (this.Config.Level > LogLevel.Exception) return;
