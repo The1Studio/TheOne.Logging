@@ -11,27 +11,27 @@ namespace UniT.Logging
 
         protected sealed override void Debug(string message)
         {
-            UnityEngine.Debug.unityLogger.Log(this.Name, message);
+            UnityEngine.Debug.unityLogger.Log(nameof(UniT), message);
         }
 
         protected sealed override void Info(string message)
         {
-            UnityEngine.Debug.unityLogger.Log(this.Name, message);
+            UnityEngine.Debug.unityLogger.Log(nameof(UniT), message);
         }
 
         protected sealed override void Warning(string message)
         {
-            UnityEngine.Debug.unityLogger.LogWarning(this.Name, message);
+            UnityEngine.Debug.unityLogger.LogWarning(nameof(UniT), message);
         }
 
         protected sealed override void Error(string message)
         {
-            UnityEngine.Debug.unityLogger.LogError(this.Name, message);
+            UnityEngine.Debug.unityLogger.LogError(nameof(UniT), message);
         }
 
         protected sealed override void Critical(string message)
         {
-            UnityEngine.Debug.unityLogger.LogError(this.Name, message);
+            UnityEngine.Debug.unityLogger.LogError(nameof(UniT), message);
         }
 
         protected sealed override void Exception(Exception exception)

@@ -82,7 +82,7 @@ namespace UniT.Logging
             this.Exception(exception);
         }
 
-        protected virtual string Wrap(string message, [CallerMemberName] string logLevel = "") => $"[{logLevel}] {message}";
+        protected virtual string Wrap(string message, [CallerMemberName] string logLevel = "") => $"{$"[{logLevel}]",-10} [{this.Name}] {message}";
 
         protected abstract void Debug(string message);
 
