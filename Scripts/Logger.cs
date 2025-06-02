@@ -16,64 +16,64 @@ namespace UniT.Logging
             this.Config = config;
         }
 
-        void ILogger.Debug(string message)
+        void ILogger.Debug(string message, string context)
         {
             if (this.Config.Level > LogLevel.Debug) return;
-            this.Debug(this.Wrap(message));
+            this.Debug(this.Wrap(message, context));
         }
 
-        void ILogger.Info(string message)
+        void ILogger.Info(string message, string context)
         {
             if (this.Config.Level > LogLevel.Info) return;
-            this.Info(this.Wrap(message));
+            this.Info(this.Wrap(message, context));
         }
 
-        void ILogger.Warning(string message)
+        void ILogger.Warning(string message, string context)
         {
             if (this.Config.Level > LogLevel.Warning) return;
-            this.Warning(this.Wrap(message));
+            this.Warning(this.Wrap(message, context));
         }
 
-        void ILogger.Error(string message)
+        void ILogger.Error(string message, string context)
         {
             if (this.Config.Level > LogLevel.Error) return;
-            this.Error(this.Wrap(message));
+            this.Error(this.Wrap(message, context));
         }
 
-        void ILogger.Critical(string message)
+        void ILogger.Critical(string message, string context)
         {
             if (this.Config.Level > LogLevel.Critical) return;
-            this.Critical(this.Wrap(message));
+            this.Critical(this.Wrap(message, context));
         }
 
-        void ILogger.Debug(Func<string> messageBuilder)
+        void ILogger.Debug(Func<string> messageBuilder, string context)
         {
             if (this.Config.Level > LogLevel.Debug) return;
-            this.Debug(this.Wrap(messageBuilder()));
+            this.Debug(this.Wrap(messageBuilder(), context));
         }
 
-        void ILogger.Info(Func<string> messageBuilder)
+        void ILogger.Info(Func<string> messageBuilder, string context)
         {
             if (this.Config.Level > LogLevel.Info) return;
-            this.Info(this.Wrap(messageBuilder()));
+            this.Info(this.Wrap(messageBuilder(), context));
         }
 
-        void ILogger.Warning(Func<string> messageBuilder)
+        void ILogger.Warning(Func<string> messageBuilder, string context)
         {
             if (this.Config.Level > LogLevel.Warning) return;
-            this.Warning(this.Wrap(messageBuilder()));
+            this.Warning(this.Wrap(messageBuilder(), context));
         }
 
-        void ILogger.Error(Func<string> messageBuilder)
+        void ILogger.Error(Func<string> messageBuilder, string context)
         {
             if (this.Config.Level > LogLevel.Error) return;
-            this.Error(this.Wrap(messageBuilder()));
+            this.Error(this.Wrap(messageBuilder(), context));
         }
 
-        void ILogger.Critical(Func<string> messageBuilder)
+        void ILogger.Critical(Func<string> messageBuilder, string context)
         {
             if (this.Config.Level > LogLevel.Critical) return;
-            this.Critical(this.Wrap(messageBuilder()));
+            this.Critical(this.Wrap(messageBuilder(), context));
         }
 
         void ILogger.Exception(Exception exception)
@@ -82,7 +82,7 @@ namespace UniT.Logging
             this.Exception(exception);
         }
 
-        protected virtual string Wrap(string message, [CallerMemberName] string logLevel = "") => $"{$"[{logLevel}]",-10} [{this.Name}] {message}";
+        protected virtual string Wrap(string message, string context, [CallerMemberName] string logLevel = "") => $"{$"[{logLevel}]",-10} [{this.Name}] [{context}] {message}";
 
         protected abstract void Debug(string message);
 
