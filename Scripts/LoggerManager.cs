@@ -2,14 +2,13 @@
 namespace UniT.Logging
 {
     using System.Collections.Generic;
-    using System.Linq;
     using UniT.Extensions;
 
-    public abstract class LoggerManager<TLogger> : ILoggerManager where TLogger : ILogger
+    public abstract class LoggerManager : ILoggerManager
     {
         private readonly LogLevel level;
 
-        private readonly Dictionary<string, TLogger> loggers = new Dictionary<string, TLogger>();
+        private readonly Dictionary<string, ILogger> loggers = new Dictionary<string, ILogger>();
 
         protected LoggerManager(LogLevel level)
         {
@@ -23,9 +22,9 @@ namespace UniT.Logging
 
         IEnumerable<ILogger> ILoggerManager.GetAllLoggers()
         {
-            return this.loggers.Values.Cast<ILogger>();
+            return this.loggers.Values;
         }
 
-        protected abstract TLogger CreateLogger(string name, LogConfig config);
+        protected abstract ILogger CreateLogger(string name, LogConfig config);
     }
 }

@@ -3,13 +3,13 @@ namespace UniT.Logging
 {
     using UnityEngine.Scripting;
 
-    public sealed class UnityLoggerManager : LoggerManager<UnityLogger>
+    public sealed class UnityLoggerManager : LoggerManager
     {
         [Preserve]
         public UnityLoggerManager(LogLevel level) : base(level)
         {
         }
 
-        protected override UnityLogger CreateLogger(string name, LogConfig config) => new UnityLogger(name, config);
+        protected override ILogger CreateLogger(string name, LogConfig config) => new UnityLogger(name, config);
     }
 }
