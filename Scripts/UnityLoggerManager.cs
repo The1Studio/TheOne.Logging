@@ -6,10 +6,10 @@ namespace UniT.Logging
     public sealed class UnityLoggerManager : LoggerManager
     {
         [Preserve]
-        public UnityLoggerManager(LogLevel level) : base(level)
+        public UnityLoggerManager(LogLevel logLevel) : base(logLevel)
         {
         }
 
-        protected override ILogger CreateLogger(string name, LogConfig config) => new UnityLogger(name, config);
+        protected override ILogger CreateLogger(string name, LogLevel logLevel) => new UnityLogger(name, logLevel);
     }
 }

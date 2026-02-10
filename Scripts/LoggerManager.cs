@@ -6,18 +6,18 @@ namespace UniT.Logging
 
     public abstract class LoggerManager : ILoggerManager
     {
-        private readonly LogLevel level;
+        private readonly LogLevel logLevel;
 
         private readonly Dictionary<string, ILogger> loggers = new Dictionary<string, ILogger>();
 
-        protected LoggerManager(LogLevel level)
+        protected LoggerManager(LogLevel logLevel)
         {
-            this.level = level;
+            this.logLevel = logLevel;
         }
 
         ILogger ILoggerManager.GetLogger(string name)
         {
-            return this.loggers.GetOrAdd(name, () => this.CreateLogger(name, new LogConfig { Level = this.level }));
+            return this.loggers.GetOrAdd(name, () => this.CreateLogger(name, this.logLevel));
         }
 
         IEnumerable<ILogger> ILoggerManager.GetAllLoggers()
@@ -25,6 +25,6 @@ namespace UniT.Logging
             return this.loggers.Values;
         }
 
-        protected abstract ILogger CreateLogger(string name, LogConfig config);
+        protected abstract ILogger CreateLogger(string name, LogLevel logLevel);
     }
 }

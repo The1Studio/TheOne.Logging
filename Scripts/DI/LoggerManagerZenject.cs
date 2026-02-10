@@ -11,7 +11,7 @@ namespace UniT.Logging.DI
             if (container.HasBinding<ILoggerManager>()) return;
             if (!container.HasBinding<LogLevel>())
             {
-                container.Bind<LogLevel>().FromMethod(() => LogLevel.Info).AsSingle();
+                container.BindInstance(LogLevel.Info);
             }
             container.BindInterfacesTo<UnityLoggerManager>().AsSingle();
             container.Bind<ILogger>().FromMethod(ctx => ctx.Container.Resolve<ILoggerManager>().GetLogger(ctx.ObjectType)).AsTransient();

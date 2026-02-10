@@ -2,41 +2,51 @@
 namespace UniT.Logging
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using UnityEngine;
 
-    public sealed class UnityLogger : Logger
+    public sealed class UnityLogger : ILogger
     {
-        public UnityLogger(string name, LogConfig config) : base(name, config)
+        public string Name { get; }
+
+        public LogLevel LogLevel { get; }
+
+        public UnityLogger(string name, LogLevel logLevel)
         {
+            this.Name     = name;
+            this.LogLevel = logLevel;
         }
 
-        protected override void Debug(string message)
+        void ILogger.Debug(string message, string context)
         {
-            UnityEngine.Debug.unityLogger.Log(nameof(UniT), message);
+            Debug.unityLogger.Log(nameof(UniT), this.Wrap(message, context));
         }
 
-        protected override void Info(string message)
+        void ILogger.Info(string message, string context)
         {
-            UnityEngine.Debug.unityLogger.Log(nameof(UniT), message);
+            Debug.unityLogger.Log(nameof(UniT), this.Wrap(message, context));
         }
 
-        protected override void Warning(string message)
+        void ILogger.Warning(string message, string context)
         {
-            UnityEngine.Debug.unityLogger.LogWarning(nameof(UniT), message);
+            Debug.unityLogger.LogWarning(nameof(UniT), this.Wrap(message, context));
         }
 
-        protected override void Error(string message)
+        void ILogger.Error(string message, string context)
         {
-            UnityEngine.Debug.unityLogger.LogError(nameof(UniT), message);
+            Debug.unityLogger.LogError(nameof(UniT), this.Wrap(message, context));
         }
 
-        protected override void Critical(string message)
+        void ILogger.Critical(string message, string context)
         {
-            UnityEngine.Debug.unityLogger.LogError(nameof(UniT), message);
+            Debug.unityLogger.LogError(nameof(UniT), this.Wrap(message, context));
         }
 
-        protected override void Exception(Exception exception)
+        void ILogger.Exception(Exception exception)
         {
-            UnityEngine.Debug.unityLogger.LogException(exception);
+            Debug.unityLogger.LogException(exception);
         }
+
+        private string Wrap(string message, string context, [CallerMemberName] string logLevel = "") => $"{$"[{logLevel}]",-10} [{this.Name}] [{context}] {message}";
     }
 }

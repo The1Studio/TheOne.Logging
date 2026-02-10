@@ -1,52 +1,116 @@
+#if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL && !UNIT_LOGGING_EXCEPTION && !UNIT_LOGGING_NONE
+#define UNIT_LOGGING_INFO
+#endif
 #nullable enable
 namespace UniT.Logging
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
     public interface ILogger
     {
         public string Name { get; }
 
-        public LogConfig Config { get; }
+        public LogLevel LogLevel { get; }
 
-        public void Debug(string message, [CallerMemberName] string context = "");
+        internal void Debug(string message, string context);
 
-        public void Info(string message, [CallerMemberName] string context = "");
+        internal void Info(string message, string context);
 
-        public void Warning(string message, [CallerMemberName] string context = "");
+        internal void Warning(string message, string context);
 
-        public void Error(string message, [CallerMemberName] string context = "");
+        internal void Error(string message, string context);
 
-        public void Critical(string message, [CallerMemberName] string context = "");
+        internal void Critical(string message, string context);
 
-        public void Log(string message, LogLevel level, [CallerMemberName] string context = "")
+        internal void Exception(Exception exception);
+    }
+
+    public static class LoggerExtensions
+    {
+        #if !UNIT_LOGGING_DEBUG
+        [Conditional("FALSE")]
+        #endif
+        public static void Debug(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
+            if (logger.LogLevel > LogLevel.Debug) return;
+            logger.Debug(message, context);
+        }
+
+        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO
+        [Conditional("FALSE")]
+        #endif
+        public static void Info(this ILogger logger, string message, [CallerMemberName] string context = "")
+        {
+            if (logger.LogLevel > LogLevel.Info) return;
+            logger.Info(message, context);
+        }
+
+        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING
+        [Conditional("FALSE")]
+        #endif
+        public static void Warning(this ILogger logger, string message, [CallerMemberName] string context = "")
+        {
+            if (logger.LogLevel > LogLevel.Warning) return;
+            logger.Warning(message, context);
+        }
+
+        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR
+        [Conditional("FALSE")]
+        #endif
+        public static void Error(this ILogger logger, string message, [CallerMemberName] string context = "")
+        {
+            if (logger.LogLevel > LogLevel.Error) return;
+            logger.Error(message, context);
+        }
+
+        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL
+        [Conditional("FALSE")]
+        #endif
+        public static void Critical(this ILogger logger, string message, [CallerMemberName] string context = "")
+        {
+            if (logger.LogLevel > LogLevel.Critical) return;
+            logger.Critical(message, context);
+        }
+
+        #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL && !UNIT_LOGGING_EXCEPTION
+        [Conditional("FALSE")]
+        #endif
+        public static void Exception(this ILogger logger, Exception exception)
+        {
+            if (logger.LogLevel > LogLevel.Exception) return;
+            logger.Exception(exception);
+        }
+
+        public static void Log(this ILogger logger, string message, LogLevel level, [CallerMemberName] string context = "")
+        {
+            if (logger.LogLevel > level) return;
             switch (level)
             {
                 case LogLevel.Debug:
                 {
-                    this.Debug(message, context);
+                    logger.Debug(message, context);
                     break;
                 }
                 case LogLevel.Info:
                 {
-                    this.Info(message, context);
+                    logger.Info(message, context);
                     break;
                 }
                 case LogLevel.Warning:
                 {
-                    this.Warning(message, context);
+                    logger.Warning(message, context);
                     break;
                 }
                 case LogLevel.Error:
                 {
-                    this.Error(message, context);
+                    logger.Error(message, context);
                     break;
                 }
                 case LogLevel.Critical:
                 {
-                    this.Critical(message, context);
+                    logger.Critical(message, context);
                     break;
                 }
                 case LogLevel.None: break;
@@ -54,64 +118,6 @@ namespace UniT.Logging
             }
         }
 
-        public void Debug(Func<string> messageBuilder, [CallerMemberName] string context = "");
-
-        public void Info(Func<string> messageBuilder, [CallerMemberName] string context = "");
-
-        public void Warning(Func<string> messageBuilder, [CallerMemberName] string context = "");
-
-        public void Error(Func<string> messageBuilder, [CallerMemberName] string context = "");
-
-        public void Critical(Func<string> messageBuilder, [CallerMemberName] string context = "");
-
-        public void Log(Func<string> messageBuilder, LogLevel level, [CallerMemberName] string context = "")
-        {
-            switch (level)
-            {
-                case LogLevel.Debug:
-                {
-                    this.Debug(messageBuilder, context);
-                    break;
-                }
-                case LogLevel.Info:
-                {
-                    this.Info(messageBuilder, context);
-                    break;
-                }
-                case LogLevel.Warning:
-                {
-                    this.Warning(messageBuilder, context);
-                    break;
-                }
-                case LogLevel.Error:
-                {
-                    this.Error(messageBuilder, context);
-                    break;
-                }
-                case LogLevel.Critical:
-                {
-                    this.Critical(messageBuilder, context);
-                    break;
-                }
-                case LogLevel.None: break;
-                default:            throw new ArgumentOutOfRangeException(nameof(level), level, null);
-            }
-        }
-
-        public void Exception(Exception exception);
-
-        public void Debug(object message, [CallerMemberName] string context = "") => this.Debug(message.ToString(), context);
-
-        public void Info(object message, [CallerMemberName] string context = "") => this.Info(message.ToString(), context);
-
-        public void Warning(object message, [CallerMemberName] string context = "") => this.Warning(message.ToString(), context);
-
-        public void Error(object message, [CallerMemberName] string context = "") => this.Error(message.ToString(), context);
-
-        public void Critical(object message, [CallerMemberName] string context = "") => this.Critical(message.ToString(), context);
-
-        public void Log(object message, LogLevel level, [CallerMemberName] string context = "") => this.Log(message.ToString(), level, context);
-
-        public void Log(Exception exception) => this.Exception(exception);
+        public static void Log(this ILogger logger, Exception exception) => Exception(logger, exception);
     }
 }
