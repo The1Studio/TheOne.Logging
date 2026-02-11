@@ -12,19 +12,19 @@ namespace UniT.Logging
     {
         public string Name { get; }
 
-        public LogLevel LogLevel { get; }
+        public LogLevel LogLevel { get; set; }
 
-        internal void Debug(string message, string context);
+        protected internal void Debug(string message, string context);
 
-        internal void Info(string message, string context);
+        protected internal void Info(string message, string context);
 
-        internal void Warning(string message, string context);
+        protected internal void Warning(string message, string context);
 
-        internal void Error(string message, string context);
+        protected internal void Error(string message, string context);
 
-        internal void Critical(string message, string context);
+        protected internal void Critical(string message, string context);
 
-        internal void Exception(Exception exception);
+        protected internal void Exception(Exception exception);
     }
 
     public static class LoggerExtensions
@@ -82,42 +82,5 @@ namespace UniT.Logging
             if (logger.LogLevel > LogLevel.Exception) return;
             logger.Exception(exception);
         }
-
-        public static void Log(this ILogger logger, string message, LogLevel level, [CallerMemberName] string context = "")
-        {
-            if (logger.LogLevel > level) return;
-            switch (level)
-            {
-                case LogLevel.Debug:
-                {
-                    logger.Debug(message, context);
-                    break;
-                }
-                case LogLevel.Info:
-                {
-                    logger.Info(message, context);
-                    break;
-                }
-                case LogLevel.Warning:
-                {
-                    logger.Warning(message, context);
-                    break;
-                }
-                case LogLevel.Error:
-                {
-                    logger.Error(message, context);
-                    break;
-                }
-                case LogLevel.Critical:
-                {
-                    logger.Critical(message, context);
-                    break;
-                }
-                case LogLevel.None: break;
-                default:            throw new ArgumentOutOfRangeException(nameof(level), level, null);
-            }
-        }
-
-        public static void Log(this ILogger logger, Exception exception) => Exception(logger, exception);
     }
 }

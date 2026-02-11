@@ -7,15 +7,19 @@ namespace UniT.Logging
 
     public sealed class UnityLogger : ILogger
     {
-        public string Name { get; }
+        private readonly string name;
 
-        public LogLevel LogLevel { get; }
+        private LogLevel logLevel;
 
         public UnityLogger(string name, LogLevel logLevel)
         {
-            this.Name     = name;
-            this.LogLevel = logLevel;
+            this.name     = name;
+            this.logLevel = logLevel;
         }
+
+        string ILogger.Name => this.name;
+
+        LogLevel ILogger.LogLevel { get => this.logLevel; set => this.logLevel = value; }
 
         void ILogger.Debug(string message, string context)
         {
@@ -47,6 +51,6 @@ namespace UniT.Logging
             Debug.unityLogger.LogException(exception);
         }
 
-        private string Wrap(string message, string context, [CallerMemberName] string logLevel = "") => $"{$"[{logLevel}]",-10} [{this.Name}] [{context}] {message}";
+        private string Wrap(string message, string context, [CallerMemberName] string logLevel = "") => $"{$"[{logLevel}]",-10} [{this.name}] [{context}] {message}";
     }
 }
