@@ -24,7 +24,7 @@ namespace UniT.Logging
 
         protected internal void Critical(string message, string context);
 
-        protected internal void Exception(Exception exception);
+        protected internal void Exception(Exception exception, string context);
     }
 
     public static class LoggerExtensions
@@ -77,10 +77,10 @@ namespace UniT.Logging
         #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL && !UNIT_LOGGING_EXCEPTION
         [Conditional("UNIT_LOGGING_EXCEPTION")]
         #endif
-        public static void Exception(this ILogger logger, Exception exception)
+        public static void Exception(this ILogger logger, Exception exception, [CallerMemberName] string context = "")
         {
             if (logger.LogLevel > LogLevel.Exception) return;
-            logger.Exception(exception);
+            logger.Exception(exception, context);
         }
     }
 }

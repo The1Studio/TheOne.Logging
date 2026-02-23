@@ -46,8 +46,9 @@ namespace UniT.Logging
             Debug.unityLogger.LogError(nameof(UniT), this.Wrap(message, context));
         }
 
-        void ILogger.Exception(Exception exception)
+        void ILogger.Exception(Exception exception, string context)
         {
+            Debug.unityLogger.LogError(nameof(UniT), this.Wrap(exception.Message, context));
             Debug.unityLogger.LogException(exception);
         }
 
