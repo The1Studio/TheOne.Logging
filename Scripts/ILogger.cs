@@ -30,7 +30,7 @@ namespace UniT.Logging
     public static class LoggerExtensions
     {
         #if !UNIT_LOGGING_DEBUG
-        [Conditional("FALSE")]
+        [Conditional("UNIT_LOGGING_DEBUG")]
         #endif
         public static void Debug(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -39,7 +39,7 @@ namespace UniT.Logging
         }
 
         #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO
-        [Conditional("FALSE")]
+        [Conditional("UNIT_LOGGING_INFO")]
         #endif
         public static void Info(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -48,7 +48,7 @@ namespace UniT.Logging
         }
 
         #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING
-        [Conditional("FALSE")]
+        [Conditional("UNIT_LOGGING_WARNING")]
         #endif
         public static void Warning(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -57,7 +57,7 @@ namespace UniT.Logging
         }
 
         #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR
-        [Conditional("FALSE")]
+        [Conditional("UNIT_LOGGING_ERROR")]
         #endif
         public static void Error(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -66,7 +66,7 @@ namespace UniT.Logging
         }
 
         #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL
-        [Conditional("FALSE")]
+        [Conditional("UNIT_LOGGING_CRITICAL")]
         #endif
         public static void Critical(this ILogger logger, string message, [CallerMemberName] string context = "")
         {
@@ -75,7 +75,7 @@ namespace UniT.Logging
         }
 
         #if !UNIT_LOGGING_DEBUG && !UNIT_LOGGING_INFO && !UNIT_LOGGING_WARNING && !UNIT_LOGGING_ERROR && !UNIT_LOGGING_CRITICAL && !UNIT_LOGGING_EXCEPTION
-        [Conditional("FALSE")]
+        [Conditional("UNIT_LOGGING_EXCEPTION")]
         #endif
         public static void Exception(this ILogger logger, Exception exception)
         {
